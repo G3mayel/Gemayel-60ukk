@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('report_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('report_id')->unique();
-            $table->string('student_id')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->foreignId('report_id')->constrained()->cascadeOnDelete();
+            $table->string('photo_path', 255);
+            $table->timestamp('uploaded_at')->useCurrent();
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('report_photos');
     }
 };

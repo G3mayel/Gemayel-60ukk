@@ -173,23 +173,19 @@ export default function ManageKategori({ categories = {} }) {
         setIsDeleteOpen(true);
     };
 
-    // ✨ Handler dengan Validasi
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 1. Validasi Client-Side
         let formErrors = {};
         if (formData.name.trim().length < 3) {
             formErrors.category_name = "Nama kategori minimal 3 karakter.";
         }
 
-        // Jika ada error, stop dan tampilkan
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
             return;
         }
 
-        // Lanjut ke server
         setErrors({});
         setSaving(true);
         const payload = {
@@ -220,7 +216,7 @@ export default function ManageKategori({ categories = {} }) {
                 },
                 onError: (serverErrors) => {
                     setSaving(false);
-                    setErrors(serverErrors); // Tangkap error validasi server
+                    setErrors(serverErrors); 
                     toast.error("Gagal menambahkan kategori.");
                 },
             });
@@ -606,7 +602,6 @@ export default function ManageKategori({ categories = {} }) {
                 </DialogContent>
             </Dialog>
 
-            {/* Modal Konfirmasi Hapus */}
             <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
                 <DialogContent className="p-0 gap-0 overflow-hidden bg-white sm:max-w-[440px] border-slate-200/70 rounded-2xl shadow-[0_18px_45px_rgba(0,0,0,0.10)]">
                     <div className="flex flex-col bg-white">
@@ -651,7 +646,6 @@ export default function ManageKategori({ categories = {} }) {
                 </DialogContent>
             </Dialog>
 
-            {/* Logout Confirmation Dialog */}
             <AlertDialog open={logoutConfirmOpen} onOpenChange={setLogoutConfirmOpen}>
                 <AlertDialogContent className="rounded-2xl border-slate-200/70 shadow-lg max-w-md">
                     <AlertDialogHeader className="space-y-2">

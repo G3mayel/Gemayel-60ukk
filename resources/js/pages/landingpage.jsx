@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Lenis from 'lenis'
 import { Head } from "@inertiajs/react";
+import { SiInstagram,SiFacebook, SiX, SiLinkerd } from "@icons-pack/react-simple-icons";
 
 const background = "/img/background.svg";
 const background2 = "/img/background2.svg";
@@ -75,7 +76,7 @@ const lenis = new Lenis({
 });
 
 
-const SchoolFacilityCard = () => {
+const Landingpage = () => {
     const [scrollY, setScrollY] = useState(0);
     const [box2ScrollOffset, setBox2ScrollOffset] = useState(0);
     const [box3ScrollOffset, setBox3ScrollOffset] = useState(0);
@@ -672,10 +673,10 @@ const SchoolFacilityCard = () => {
                             transparan.
                         </p>
                         <div className="flex gap-4 mt-2">
-                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl">📷</a>
-                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl">𝕏</a>
-                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl">in</a>
-                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl">f</a>
+                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl"><SiInstagram/></a>
+                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl"><SiFacebook/></a>
+                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl"><SiLinkerd /></a>
+                            <a href="#" className="cursor-pointer hover:text-white/80 transition-colors text-2xl"><SiFacebook /></a>
                         </div>
                     </div>
 
@@ -828,4 +829,4 @@ const SchoolFacilityCard = () => {
     );
 };
 
-export default SchoolFacilityCard;
+export default Landingpage;
