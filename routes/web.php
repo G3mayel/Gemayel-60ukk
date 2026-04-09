@@ -12,13 +12,12 @@ Route::get('/', function () {
         return inertia('landingpage');
     });
 
-// Auth 
 Route::get('/login',        [AuthController::class, 'create'])->name('login');
 Route::post('/login',       [AuthController::class, 'store']);
 Route::get('/admin/login',  [AuthController::class, 'create'])->name('admin.login');
 Route::post('/admin/login', [AuthController::class, 'store']);
 Route::post('/logout',      [AuthController::class, 'destroy'])->name('logout')->middleware('auth');
-// STUDENTS
+
 Route::middleware(['auth', 'level:student'])->group(function () {
     Route::get('/dashboard', function () {
         return inertia('students/dashboard', ['user' => auth()->user()]);
@@ -38,7 +37,7 @@ Route::middleware(['auth', 'level:student'])->group(function () {
     Route::post('/reports',  [ReportController::class, 'store']);
     Route::get('/history',   [ReportController::class, 'history']);
 });
-// ADMINS
+
 Route::middleware(['auth', 'level:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('admin.dashboard');

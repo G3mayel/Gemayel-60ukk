@@ -107,7 +107,6 @@ export default function ManageKategori({ categories = {} }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [deleting, setDeleting] = useState(false);
 
-    // ✨ State baru untuk menampung error
     const [errors, setErrors] = useState({});
 
     const rawCategories = useMemo(() => {
@@ -152,7 +151,7 @@ export default function ManageKategori({ categories = {} }) {
 
     const handleOpenAdd = () => {
         setFormData({ id: "", name: "", description: "" });
-        setErrors({}); // Reset error
+        setErrors({}); 
         setIsEditing(false);
         setIsFormOpen(true);
     };
@@ -163,7 +162,7 @@ export default function ManageKategori({ categories = {} }) {
             name: item.name,
             description: item.description,
         });
-        setErrors({}); // Reset error
+        setErrors({}); 
         setIsEditing(true);
         setIsFormOpen(true);
     };
@@ -203,7 +202,7 @@ export default function ManageKategori({ categories = {} }) {
                 },
                 onError: (serverErrors) => {
                     setSaving(false);
-                    setErrors(serverErrors); // Tangkap error validasi server
+                    setErrors(serverErrors); 
                     toast.error("Gagal memperbarui kategori.");
                 },
             });

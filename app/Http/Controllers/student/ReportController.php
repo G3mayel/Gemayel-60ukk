@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 
 use Inertia\Inertia;
 use App\Models\Report;
@@ -23,7 +23,9 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        try {
         $validated = $request->validate([
+            'student_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
             'title' => 'required|string|max:100',
             'location' => 'required|string|max:100',
@@ -52,6 +54,9 @@ class ReportController extends Controller
         }
 
         return redirect('/dashboard')->with('success', 'Aspirasi berhasil dikirim!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal mengirim aspirasi: ' . $e->getMessage());
+        }
     }
 
     public function history(Request $request)

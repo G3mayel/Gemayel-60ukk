@@ -38,7 +38,7 @@ class UserController extends Controller
                 'level'     => 'student',
             ]);
 
-            return redirect('/admin/users')->with('success', 'Akun siswa berhasil dibuat.');
+            return redirect('/admin/users')->with('success', 'Akun siswa berhasil dibuat');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal membuat akun: ' . $e->getMessage());
         }
@@ -66,7 +66,7 @@ class UserController extends Controller
                 $user->update($data);
             }
 
-            return redirect('/admin/users', 303)->with('success', 'Password berhasil diperbarui.');
+            return redirect('/admin/users', 303)->with('success', 'Password berhasil diperbarui');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
         }

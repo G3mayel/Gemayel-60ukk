@@ -12,7 +12,7 @@ class ReportPhoto extends Model
 
     protected $appends = ['photo_url'];
 
-    protected $visible = ['id', 'report_id', 'photo_path', 'uploaded_at', 'photo_url'];
+    protected $fillable = ['id', 'report_id', 'photo_path', 'uploaded_at', 'photo_url'];
 
     public function report()
     {

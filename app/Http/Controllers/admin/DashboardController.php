@@ -31,7 +31,7 @@ class DashboardController extends Controller
             ->map(fn($r) => [
                 'id'       => $r->id,
                 'title'    => $r->title,
-                'category' => $r->category?->category_name ?? 'Uncategorized',
+                'category' => $r->category?->category_name ?? 'Belum dikategorikan',
                 'location' => $r->location ?? '-',
                 'time'     => $r->created_at->format('H:i'),
                 'status'   => $r->status,

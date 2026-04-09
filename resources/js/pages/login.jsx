@@ -47,7 +47,6 @@ export default function Login({ role: initialRole = "siswa" }) {
 
         let hasError = false;
 
-        // Validasi Kosong di sisi Klien (Biar langsung merah kalau kosong)
         if (!data.identifier.trim()) {
             setError(
                 "identifier",
@@ -67,11 +66,9 @@ export default function Login({ role: initialRole = "siswa" }) {
             return;
         }
 
-        // Tembak ke Server (Backend Laravel)
         post(LOGIN_URL[role], {
             preserveScroll: true,
             onError: (serverErrors) => {
-                // ✨ Jika login gagal dari server, buat KEDUA kotak menjadi merah
                 setError(
                     "identifier",
                     serverErrors.identifier || "Kredensial tidak ditemukan.",
@@ -80,7 +77,7 @@ export default function Login({ role: initialRole = "siswa" }) {
 
                 toast.error("Gagal masuk. Username/NISN atau Password salah.");
             },
-            onFinish: () => reset("password"), // Reset isi password setiap kali gagal
+            onFinish: () => reset("password"),
         });
     };
 
@@ -176,8 +173,8 @@ export default function Login({ role: initialRole = "siswa" }) {
                                                     e.target.value,
                                                 );
                                                 if (errors.identifier)
-                                                    clearErrors("identifier"); // Hilangkan merah saat ngetik ulang
-                                            }}
+                                                    clearErrors("identifier");
+                                                }}
                                             placeholder={
                                                 isSiswa
                                                     ? "Masukkan NISN"
@@ -216,7 +213,7 @@ export default function Login({ role: initialRole = "siswa" }) {
                                                     e.target.value,
                                                 );
                                                 if (errors.password)
-                                                    clearErrors("password"); // Hilangkan merah saat ngetik ulang
+                                                    clearErrors("password"); 
                                             }}
                                             placeholder="Masukkan password"
                                             disabled={processing}

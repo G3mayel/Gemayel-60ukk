@@ -38,8 +38,6 @@ export default function AspirationCreate({ categories, user }) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const fileInputRef = useRef(null);
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-
-    // ✨ Memanfaatkan setError dan clearErrors bawaan useForm Inertia
     const { data, setData, post, processing, errors, setError, clearErrors, reset } = useForm({
         category_id: "",
         title: "",
@@ -101,10 +99,9 @@ export default function AspirationCreate({ categories, user }) {
         }
     }
 
-    // ✨ Handler Form dengan Validasi Client-side & Server-side
     function handleSubmit(e) {
         e.preventDefault();
-        clearErrors(); // Reset semua error sebelum divalidasi ulang
+        clearErrors(); 
 
         let hasError = false;
 
@@ -130,11 +127,9 @@ export default function AspirationCreate({ categories, user }) {
             return;
         }
 
-        // Jika semua validasi lolos, tampilkan dialog konfirmasi
         setConfirmDialogOpen(true);
     }
 
-    // ✨ Fungsi untuk submit setelah konfirmasi
     function confirmSubmit() {
         setConfirmDialogOpen(false);
         post("/reports", {
@@ -144,7 +139,6 @@ export default function AspirationCreate({ categories, user }) {
                 handleReset();
             },
             onError: (serverErrors) => {
-                // Error dari server otomatis masuk ke object `errors` bawaan useForm
                 toast.error("Gagal mengirim aspirasi. Silakan cek kembali data Anda.");
             },
         });

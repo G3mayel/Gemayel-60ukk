@@ -55,7 +55,7 @@ class AdminReportController extends Controller
                 'admin_notes' => $request->notes,
             ]);
 
-            return redirect('/admin/reports', 303)->with('success', 'Status laporan berhasil diperbarui.');
+            return redirect('/admin/reports', 303)->with('success', 'Status laporan berhasil diperbarui');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal memperbarui status: ' . $e->getMessage());
         }

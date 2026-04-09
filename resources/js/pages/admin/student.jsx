@@ -93,19 +93,14 @@ export default function ManageSiswa({ students = [] }) {
         }
     }, [flash]);
 
-    // State Modal
     const [isAddOpen, setIsAddOpen] = useState(false);
     const [isEditPwdOpen, setIsEditPwdOpen] = useState(false);
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
-    // State Form & Action
     const [selectedUser, setSelectedUser] = useState(null);
     const [addFormData, setAddFormData] = useState(EMPTY_ADD_FORM);
     const [newPassword, setNewPassword] = useState("");
     const [saving, setSaving] = useState(false);
     const [deleting, setDeleting] = useState(false);
-
-    // ✨ State baru untuk menampung error form
     const [errors, setErrors] = useState({});
 
     const rawUsers = useMemo(() => {
@@ -154,32 +149,27 @@ export default function ManageSiswa({ students = [] }) {
         items.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
     const endItem = Math.min(currentPage * PAGE_SIZE, items.length);
 
-    // Buka Modal Tambah
     const handleOpenAdd = () => {
         setAddFormData(EMPTY_ADD_FORM);
-        setErrors({}); // Reset error saat modal dibuka
+        setErrors({}); 
         setIsAddOpen(true);
     };
 
-    // Buka Modal Reset Password
     const handleOpenEditPwd = (item) => {
         setSelectedUser(item);
         setNewPassword("");
-        setErrors({}); // Reset error
+        setErrors({});
         setIsEditPwdOpen(true);
     };
 
-    // Buka Modal Hapus
     const handleOpenDelete = (item) => {
         setSelectedUser(item);
         setIsDeleteOpen(true);
     };
-
-    // ✨ Handler Form Tambah (Dengan Validasi)
+ 
     const handleAddSubmit = (e) => {
         e.preventDefault();
 
-        // 1. Validasi Client-Side
         let formErrors = {};
         if (addFormData.nisn.length < 5) {
             formErrors.nisn = "NISN minimal 5 karakter.";
@@ -194,13 +184,11 @@ export default function ManageSiswa({ students = [] }) {
             formErrors.password = "Password minimal 6 karakter.";
         }
 
-        // Jika ada error, hentikan submit dan set state errors
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
             return;
         }
 
-        // Jika lolos validasi client, lanjut ke server
         setErrors({});
         setSaving(true);
         router.post("/admin/users", addFormData, {
@@ -211,7 +199,7 @@ export default function ManageSiswa({ students = [] }) {
             },
             onError: (serverErrors) => {
                 setSaving(false);
-                setErrors(serverErrors); // Tangkap error validasi dari Laravel
+                setErrors(serverErrors);
                 toast.error(
                     "Gagal membuat akun. Periksa kembali data yang diisi.",
                 );
@@ -219,12 +207,10 @@ export default function ManageSiswa({ students = [] }) {
         });
     };
 
-    // ✨ Handler Form Reset Password (Dengan Validasi)
     const handleEditPwdSubmit = (e) => {
         e.preventDefault();
         if (!selectedUser) return;
 
-        // Validasi client-side password
         if (newPassword.length < 6) {
             setErrors({ password: "Password baru minimal 6 karakter." });
             return;
@@ -607,7 +593,6 @@ export default function ManageSiswa({ students = [] }) {
                                                 });
                                         }}
                                         placeholder="Contoh: 0087776285"
-                                        // ✨ Ganti warna border jika ada error
                                         className={cn(
                                             "h-11 bg-white shadow-sm rounded-md",
                                             errors.nisn
@@ -615,7 +600,6 @@ export default function ManageSiswa({ students = [] }) {
                                                 : "border-slate-300 focus-visible:ring-blue-600",
                                         )}
                                     />
-                                    {/* ✨ Munculkan teks error */}
                                     {errors.nisn && (
                                         <p className="mt-1.5 text-xs font-semibold text-red-500">
                                             {errors.nisn}
@@ -624,7 +608,6 @@ export default function ManageSiswa({ students = [] }) {
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {/* Input Nama */}
                                     <div>
                                         <label className="mb-1.5 block text-sm font-bold text-slate-800">
                                             Nama Lengkap
